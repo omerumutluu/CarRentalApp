@@ -1,5 +1,7 @@
+using CarRentalApp.Business;
 using CarRentalApp.Business.Abstracts;
 using CarRentalApp.Business.Concretes;
+using CarRentalApp.DataAccess;
 using CarRentalApp.DataAccess.Abstracts;
 using CarRentalApp.DataAccess.Concretes.EntityFrameworkCore;
 using CarRentalApp.DataAccess.Context;
@@ -13,15 +15,8 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-builder.Services.AddDbContext<CarRentalDbContext>(ServiceLifetime.Singleton);
-
-builder.Services.AddSingleton<IBrandService, BrandManager>();
-builder.Services.AddSingleton<ICarService, CarManager>();
-builder.Services.AddSingleton<IColorService, ColorManager>();
-
-builder.Services.AddSingleton<IBrandDal, EfBrandRepository>();
-builder.Services.AddSingleton<ICarDal, EfCarRepository>();
-builder.Services.AddSingleton<IColorDal, EfColorRepository>();
+builder.Services.AddBusinessServices();
+builder.Services.AddDataAccessServices();
 
 var app = builder.Build();
 
